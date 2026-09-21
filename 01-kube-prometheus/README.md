@@ -1,41 +1,38 @@
 # Observabilidade com Kube-Prometheus no Amazon EKS
 
-Este laboratório demonstra a instalação e operação da stack completa de observabilidade
-(Prometheus Operator + Grafana + Alertmanager) em um cluster gerenciado Amazon EKS,
-cobrindo desde a instalação via manifests até a exposição segura dos dashboards.
+Laboratório de implantação da stack de observabilidade (Prometheus Operator, Grafana e
+Alertmanager) em um cluster Amazon EKS, desde a instalação via manifests até a exposição
+segura dos dashboards para acesso externo.
 
-## 🎯 Objetivo
+## Objetivo
 
-Implantar uma stack de monitoramento production-grade no EKS usando o projeto
-`kube-prometheus`, validando descoberta de métricas via CRDs, persistência de dados
-e troubleshooting de problemas reais de recurso.
+Subir uma stack de monitoramento pronta para produção no EKS usando o projeto
+`kube-prometheus`, validando a descoberta de métricas via CRDs, garantindo persistência
+de dados e resolvendo os problemas de recurso que apareceram no caminho.
 
 ## Arquitetura
 
 ![Diagrama](evidencias/diagrama-kube-prometheus.png)
 
-## Tarefas Realizadas
+## O que foi feito
 
-- Provisionamento dos CRDs (`manifests/setup/`) e verificação via `kubectl wait --for condition=Established`
-- Instalação completa da stack: Prometheus Operator, Grafana, Alertmanager, node-exporter,
-  kube-state-metrics, prometheus-adapter, blackbox-exporter
-- Diagnóstico e resolução de `OOMKilled` no Grafana via ajuste de `resources.limits`
-- Implementação de persistência via `StorageClass` (`local-path-provisioner`) e
-  `PersistentVolumeClaim` no Prometheus (CR `storage.volumeClaimTemplate`) e Grafana
-- Exposição segura via Ingress NGINX + Cloudflare Tunnel, contornando CGNAT
-- Ajuste de `NetworkPolicy` para permitir tráfego do Ingress Controller até os componentes
+- Provisionamento dos CRDs (`manifests/setup/`), com verificação via `kubectl wait --for condition=Established`
+- Instalação da stack completa: Prometheus Operator, Grafana, Alertmanager, node-exporter, kube-state-metrics, prometheus-adapter e blackbox-exporter
+- O Grafana começou a cair com `OOMKilled` — diagnosticado e resolvido ajustando os `resources.limits`
+- Persistência configurada via `StorageClass` (`local-path-provisioner`), com `PersistentVolumeClaim` tanto no Prometheus (via `storage.volumeClaimTemplate` no CR) quanto no Grafana
+- Exposição externa via Ingress NGINX + Cloudflare Tunnel, para contornar o CGNAT da rede
+- Ajuste de `NetworkPolicy` liberando o tráfego do Ingress Controller até os componentes da stack
 
-## Resultados Esperados
+## Resultado
 
-- Stack de observabilidade íntegra e persistente a reinicializações
-- Dashboards e métricas acessíveis externamente com segurança
-- Zero perda de dados em restart de Pod ou reboot de nó
+A stack ficou de pé e persistente — restart de Pod ou reboot de nó não derruba dados nem
+configuração. Dashboards e métricas acessíveis externamente, com segurança.
 
-## 📷 Evidências
+## Evidências
 
 | Componente                     | Screenshot                              |
 |---------------------------------|------------------------------------------|
 | Pods da stack `Running`         | ![Pods](evidencias/pods-monitoring.png)  |
 | PVCs `Bound`                     | ![PVC](evidencias/pvc-bound.png)         |
 | Grafana acessível externamente  | ![Grafana](evidencias/grafana-live.png)  |
-| Prometheus Targets              | ![Targets](evidencias/prometheus-targets.png) |
+| Prometheus Targets               | ![Targets](evidencias/prometheus-targets.png) |
