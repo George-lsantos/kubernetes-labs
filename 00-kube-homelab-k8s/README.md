@@ -17,7 +17,7 @@ com CGNAT — servindo como fundação para os demais laboratórios deste reposi
 
 ## Infraestrutura
 
-- Hypervisor: **Proxmox VE**, rodando em notebook Dell Latitude 3420 (i7-1165G7, 32GB RAM)
+- Hypervisor: **Proxmox VE**, rodando em computador gamer (i7, 32GB RAM)
 - Cluster: **kubeadm** (Kubernetes "puro"), 1 master + 3 workers
 - CNI: **Calico** via Tigera Operator
 - Ingress: **Ingress NGINX** (via Helm)
@@ -40,6 +40,9 @@ com CGNAT — servindo como fundação para os demais laboratórios deste reposi
 | Proxmox — VMs do cluster        | ![Proxmox](evidencias/proxmox-vms.png)   |
 | Cloudflare Tunnel `Healthy`     | ![Tunnel](evidencias/tunnel-healthy.png) |
 | DNS/rotas publicadas            | ![Routes](evidencias/tunnel-routes.png)  |
+| Calico rodando em todos os nodes | ![Calico](evidencias/calico-pods.png) |
+| Ingress NGINX Controller ativo | ![Ingress](evidencias/ingress-nginx-pods.png) |
+| Ingress roteando por hostname | ![Ingress Rules](evidencias/ingress-get-all.png) |
 
 ## Laboratórios que rodam sobre esta infraestrutura
 
