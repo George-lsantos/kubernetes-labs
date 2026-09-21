@@ -46,6 +46,6 @@ com CGNAT — servindo como fundação para os demais laboratórios deste reposi
 
 ## Laboratórios que rodam sobre esta infraestrutura
 
-- [`01-kube-prometheus-eks`](../01-kube-prometheus-eks) *(nota: este roda em EKS, não no homelab — ajustar se aplicável)*
+- [`01-kube-prometheus-eks`](../01-kube-prometheus-eks) 
 - [`02-servicemonitors-podmonitors-alertas`](../02-servicemonitors-podmonitors-alertas)
 - [`03-autoscaling-hpa-metrics-server`](../03-autoscaling-hpa-metrics-server)
